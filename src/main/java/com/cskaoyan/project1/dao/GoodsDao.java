@@ -1,6 +1,12 @@
 package com.cskaoyan.project1.dao;
 
+import com.cskaoyan.project1.model.Goods;
+import com.cskaoyan.project1.model.Type;
+import com.cskaoyan.project1.model.Spec;
+import com.cskaoyan.project1.model.vo.GoodsGetInfoVO;
 import com.cskaoyan.project1.model.vo.MsgVO;
+import com.cskaoyan.project1.model.vo.SpecVO;
+import com.cskaoyan.project1.model.vo.TypeGoodsVO;
 
 import java.util.List;
 
@@ -17,4 +23,22 @@ public interface GoodsDao {
     void reply(Integer id, String content);
 
     List<MsgVO> repliedMsg();
+
+    List<Type> getType();
+
+    List<TypeGoodsVO> getGoodsByType(String typeId);
+
+    boolean isTypeExists(String name);
+
+    void addType(String name);
+
+    void addGoods(Goods goods);
+
+    int lastInsertId();
+
+    void addSpecs(List<Spec> specs);
+
+    List<SpecVO> getSpecVO(String id);
+
+    GoodsGetInfoVO getGoodsGetInfoVO(String id);
 }
