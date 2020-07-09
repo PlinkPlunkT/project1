@@ -1,4 +1,4 @@
-package com.cskaoyan.project1.model.vo;
+package com.cskaoyan.project1.model.vo.goods;
 
 /**
  * 在GoodsInfoVO中使用

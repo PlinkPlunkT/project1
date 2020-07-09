@@ -1,8 +1,8 @@
 package com.cskaoyan.project1.service;
 
 import com.cskaoyan.project1.model.Admin;
-import com.cskaoyan.project1.model.bo.AdminChangePwdBO;
-import com.cskaoyan.project1.model.bo.AdminLoginBO;
+import com.cskaoyan.project1.model.bo.admin.AdminChangePwdBO;
+import com.cskaoyan.project1.model.bo.admin.AdminLoginBO;
 
 import java.util.List;
 

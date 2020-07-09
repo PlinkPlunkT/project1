@@ -3,10 +3,11 @@ package com.cskaoyan.project1.dao;
 import com.cskaoyan.project1.model.Goods;
 import com.cskaoyan.project1.model.Type;
 import com.cskaoyan.project1.model.Spec;
-import com.cskaoyan.project1.model.vo.GoodsGetInfoVO;
-import com.cskaoyan.project1.model.vo.MsgVO;
-import com.cskaoyan.project1.model.vo.SpecVO;
-import com.cskaoyan.project1.model.vo.TypeGoodsVO;
+import com.cskaoyan.project1.model.bo.goods.UpdateGoodsBO;
+import com.cskaoyan.project1.model.vo.goods.GoodsGetInfoVO;
+import com.cskaoyan.project1.model.vo.goods.MsgVO;
+import com.cskaoyan.project1.model.vo.goods.SpecVO;
+import com.cskaoyan.project1.model.vo.goods.TypeGoodsVO;
 
 import java.util.List;
 
@@ -41,4 +42,16 @@ public interface GoodsDao {
     List<SpecVO> getSpecVO(String id);
 
     GoodsGetInfoVO getGoodsGetInfoVO(String id);
+
+    void updateSpec(SpecVO specVO);
+
+    void updateGoods(UpdateGoodsBO updateGoodsBO);
+
+    void deleteGoods(Integer id);
+
+    void deleteSpec(Integer id);
+
+    void deleteGoodsByType(Integer typeId);
+
+    void deleteType(Integer typeId);
 }

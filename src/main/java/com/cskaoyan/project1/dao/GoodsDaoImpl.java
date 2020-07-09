@@ -2,12 +2,13 @@ package com.cskaoyan.project1.dao;
 
 import com.cskaoyan.project1.model.Goods;
 import com.cskaoyan.project1.model.Type;
-import com.cskaoyan.project1.model.bo.AddTypeBO;
+import com.cskaoyan.project1.model.bo.goods.AddTypeBO;
 import com.cskaoyan.project1.model.Spec;
-import com.cskaoyan.project1.model.vo.GoodsGetInfoVO;
-import com.cskaoyan.project1.model.vo.MsgVO;
-import com.cskaoyan.project1.model.vo.SpecVO;
-import com.cskaoyan.project1.model.vo.TypeGoodsVO;
+import com.cskaoyan.project1.model.bo.goods.UpdateGoodsBO;
+import com.cskaoyan.project1.model.vo.goods.GoodsGetInfoVO;
+import com.cskaoyan.project1.model.vo.goods.MsgVO;
+import com.cskaoyan.project1.model.vo.goods.SpecVO;
+import com.cskaoyan.project1.model.vo.goods.TypeGoodsVO;
 import com.cskaoyan.project1.utils.DruidUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -26,6 +27,70 @@ import java.util.List;
 public class GoodsDaoImpl implements GoodsDao {
 
     private QueryRunner runner = new QueryRunner(DruidUtils.getDataSource());
+
+    @Override
+    public void deleteType(Integer typeId) {
+        try {
+            runner.execute("delete from type where id = ?", typeId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteGoodsByType(Integer typeId) {
+        try {
+            runner.execute("delete from goods where typeId = ?", typeId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteSpec(Integer id) {
+        try {
+            runner.execute("delete from spec where goodsId = ?", id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteGoods(Integer id) {
+        try {
+            runner.execute("delete from goods where id = ?", id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateGoods(UpdateGoodsBO updateGoodsBO) {
+        try {
+            runner.update("update goods set `desc` = ?, img = ?, name = ?, typeId = ? where id = ?",
+                    updateGoodsBO.getDesc(),
+                    updateGoodsBO.getImg(),
+                    updateGoodsBO.getName(),
+                    updateGoodsBO.getTypeId(),
+                    updateGoodsBO.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateSpec(SpecVO specVO) {
+
+        try {
+            runner.update("update spec set specName = ?, stockNum = ?, unitPrice = ? where id = ?",
+                    specVO.getSpecName(),
+                    specVO.getStockNum(),
+                    specVO.getUnitPrice(),
+                    specVO.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public GoodsGetInfoVO getGoodsGetInfoVO(String id) {
@@ -122,12 +187,22 @@ public class GoodsDaoImpl implements GoodsDao {
     public List<TypeGoodsVO> getGoodsByType(String typeId) {
 
         List<TypeGoodsVO> typeGoodsVOS = new ArrayList<TypeGoodsVO>();
-        try {
-            typeGoodsVOS = runner.query("select id, img, name, price, typeId, stockNum from goods where typeId = ?",
-                    new BeanListHandler<TypeGoodsVO>(TypeGoodsVO.class), typeId);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(typeId.equals("-1")){
+            try {
+                typeGoodsVOS = runner.query("select id, img, name, price, typeId, stockNum from goods",
+                        new BeanListHandler<TypeGoodsVO>(TypeGoodsVO.class));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                typeGoodsVOS = runner.query("select id, img, name, price, typeId, stockNum from goods where typeId = ?",
+                        new BeanListHandler<TypeGoodsVO>(TypeGoodsVO.class), typeId);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
         return typeGoodsVOS;
     }
 

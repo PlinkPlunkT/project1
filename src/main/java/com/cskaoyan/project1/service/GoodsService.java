@@ -1,12 +1,13 @@
 package com.cskaoyan.project1.service;
 
 import com.cskaoyan.project1.model.Type;
-import com.cskaoyan.project1.model.bo.AddGoodsBO;
-import com.cskaoyan.project1.model.bo.AddTypeBO;
-import com.cskaoyan.project1.model.bo.ReplyBO;
-import com.cskaoyan.project1.model.vo.GoodsInfoVO;
-import com.cskaoyan.project1.model.vo.MsgVO;
-import com.cskaoyan.project1.model.vo.TypeGoodsVO;
+import com.cskaoyan.project1.model.bo.goods.AddGoodsBO;
+import com.cskaoyan.project1.model.bo.goods.AddTypeBO;
+import com.cskaoyan.project1.model.bo.goods.ReplyBO;
+import com.cskaoyan.project1.model.bo.goods.UpdateGoodsBO;
+import com.cskaoyan.project1.model.vo.goods.GoodsInfoVO;
+import com.cskaoyan.project1.model.vo.goods.MsgVO;
+import com.cskaoyan.project1.model.vo.goods.TypeGoodsVO;
 
 import java.util.List;
 
@@ -35,4 +36,10 @@ public interface GoodsService {
     void addGoodsBO(AddGoodsBO addGoodsBO);
 
     GoodsInfoVO getGoodsInfo(String id);
+
+    void updateGoods(UpdateGoodsBO updateGoodsBO);
+
+    void deleteGoods(Integer id);
+
+    void deleteType(Integer typeId);
 }

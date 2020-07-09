@@ -5,10 +5,11 @@ import com.cskaoyan.project1.dao.GoodsDaoImpl;
 import com.cskaoyan.project1.model.Goods;
 import com.cskaoyan.project1.model.Spec;
 import com.cskaoyan.project1.model.Type;
-import com.cskaoyan.project1.model.bo.*;
-import com.cskaoyan.project1.model.vo.GoodsInfoVO;
-import com.cskaoyan.project1.model.vo.MsgVO;
-import com.cskaoyan.project1.model.vo.TypeGoodsVO;
+import com.cskaoyan.project1.model.bo.goods.*;
+import com.cskaoyan.project1.model.vo.goods.GoodsInfoVO;
+import com.cskaoyan.project1.model.vo.goods.MsgVO;
+import com.cskaoyan.project1.model.vo.goods.SpecVO;
+import com.cskaoyan.project1.model.vo.goods.TypeGoodsVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,31 @@ import java.util.List;
 public class GoodsServiceImpl implements GoodsService {
 
     GoodsDao goodsDao = new GoodsDaoImpl();
+
+    @Override
+    public void deleteType(Integer typeId) {
+        goodsDao.deleteGoodsByType(typeId);
+        goodsDao.deleteType(typeId);
+    }
+
+    @Override
+    public void deleteGoods(Integer id) {
+        goodsDao.deleteSpec(id);
+        goodsDao.deleteGoods(id);
+    }
+
+    @Override
+    public void updateGoods(UpdateGoodsBO updateGoodsBO) {
+
+        //更新spec表
+        List<SpecVO> specVOS = updateGoodsBO.getSpecList();
+        for(SpecVO specVO : specVOS){
+            goodsDao.updateSpec(specVO);
+        }
+
+        //更新goods表
+        goodsDao.updateGoods(updateGoodsBO);
+    }
 
     @Override
     public GoodsInfoVO getGoodsInfo(String id) {

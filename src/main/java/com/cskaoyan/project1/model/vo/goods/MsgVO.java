@@ -1,4 +1,7 @@
-package com.cskaoyan.project1.model.vo;
+package com.cskaoyan.project1.model.vo.goods;
+
+import com.cskaoyan.project1.model.vo.goods.GoodsVO;
+import com.cskaoyan.project1.model.vo.user.UserVO;
 
 /**
  * @auther Ningbo Tien

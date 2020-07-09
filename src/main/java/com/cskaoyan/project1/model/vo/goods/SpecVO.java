@@ -1,17 +1,27 @@
-package com.cskaoyan.project1.model.bo;
+package com.cskaoyan.project1.model.vo.goods;
 
 /**
- * 新增商品规格BO
+ * GoodsInfoVO中使用
  * @auther Ningbo Tien
- * @date 2020-07-07 23:14
+ * @date 2020-07-08 0:54
  */
-public class SpecListBO {
+public class SpecVO {
+
+    private Integer id;
 
     private String specName;
 
     private Integer stockNum;
 
     private Double unitPrice;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getSpecName() {
         return specName;
@@ -37,4 +47,3 @@ public class SpecListBO {
         this.unitPrice = unitPrice;
     }
 }
-

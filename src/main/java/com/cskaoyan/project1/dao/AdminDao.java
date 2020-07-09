@@ -1,7 +1,7 @@
 package com.cskaoyan.project1.dao;
 
 import com.cskaoyan.project1.model.Admin;
-import com.cskaoyan.project1.model.bo.AdminChangePwdBO;
+import com.cskaoyan.project1.model.bo.admin.AdminChangePwdBO;
 
 import java.util.List;
 

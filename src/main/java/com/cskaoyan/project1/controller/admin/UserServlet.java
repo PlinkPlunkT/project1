@@ -1,4 +1,4 @@
-package com.cskaoyan.project1.controller;
+package com.cskaoyan.project1.controller.admin;
 
 import com.cskaoyan.project1.model.Result;
 import com.cskaoyan.project1.model.User;

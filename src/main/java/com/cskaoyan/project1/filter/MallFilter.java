@@ -12,15 +12,15 @@ import java.io.IOException;
 
 /**
  * @auther Ningbo Tien
- * @date 2020-07-03 19:40
- * 每一个请求发送前都会先发送一个options请求，试探性请求，如果服务器允许，那么接下来才会发送真正的请求。
+ * @date 2020-07-09 20:57
  */
-@WebFilter("/api/admin/*")
-public class AdminFilter implements Filter {
+@WebFilter("/api/mall/*")
+public class MallFilter implements Filter {
     public void destroy() {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+
         HttpServletRequest request = (HttpServletRequest)req;
         HttpServletResponse response = (HttpServletResponse)resp;
         request.setCharacterEncoding("utf-8");
@@ -33,18 +33,18 @@ public class AdminFilter implements Filter {
 
         String requestURI = request.getRequestURI();
 
-        //1.那些需要拦截，哪些不需要拦截
-        //2.针对需要拦截的，判断有无session数据
-        //3.如果没有，则拦截
-        if(!request.getMethod().equals("OPTIONS")){
-            if(auth(requestURI)){
-                Admin admin = (Admin) request.getSession().getAttribute("admin");
-                if(admin == null){
-                    response.getWriter().println(new Gson().toJson(Result.error("当前接口仅可登陆后使用！")));
-                    return;
-                }
-            }
-        }
+//        //1.那些需要拦截，哪些不需要拦截
+//        //2.针对需要拦截的，判断有无session数据
+//        //3.如果没有，则拦截
+//        if(!request.getMethod().equals("OPTIONS")){
+//            if(auth(requestURI)){
+//                Admin admin = (Admin) request.getSession().getAttribute("admin");
+//                if(admin == null){
+//                    response.getWriter().println(new Gson().toJson(Result.error("当前接口仅可登陆后使用！")));
+//                    return;
+//                }
+//            }
+//        }
 
         chain.doFilter(request, response);
     }
@@ -56,7 +56,7 @@ public class AdminFilter implements Filter {
      */
     private boolean auth(String requestURI) {
         if("/api/admin/admin/login".equals(requestURI) ||
-            "/api/admin/admin/logoutAdmin".equals(requestURI)){
+                "/api/admin/admin/logoutAdmin".equals(requestURI)){
             return false;
         }
         return true;

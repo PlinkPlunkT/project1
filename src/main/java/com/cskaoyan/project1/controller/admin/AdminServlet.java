@@ -1,22 +1,20 @@
-package com.cskaoyan.project1.controller;
+package com.cskaoyan.project1.controller.admin;
 
 import com.cskaoyan.project1.model.Admin;
-import com.cskaoyan.project1.model.bo.AdminChangePwdBO;
-import com.cskaoyan.project1.model.bo.AdminLoginBO;
+import com.cskaoyan.project1.model.bo.admin.AdminChangePwdBO;
+import com.cskaoyan.project1.model.bo.admin.AdminLoginBO;
 import com.cskaoyan.project1.model.Result;
-import com.cskaoyan.project1.model.vo.AdminLoginVO;
+import com.cskaoyan.project1.model.vo.admin.AdminLoginVO;
 import com.cskaoyan.project1.service.AdminService;
 import com.cskaoyan.project1.service.AdminServiceImpl;
 import com.cskaoyan.project1.utils.HttpUtils;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class AdminServlet extends HttpServlet {
 
     private AdminService adminService = new AdminServiceImpl();
     private Result result = new Result();
-    Gson gson = new Gson();
+    private Gson gson = new Gson();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -146,6 +144,7 @@ public class AdminServlet extends HttpServlet {
         Admin login = adminService.login(loginBO);
 //        Result result = new Result();
         if(login != null){
+            request.getSession().setAttribute("admin",login);
             AdminLoginVO loginVO = new AdminLoginVO();
             loginVO.setToken(login.getNickname());
             loginVO.setName(login.getNickname());

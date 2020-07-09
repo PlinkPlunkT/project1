@@ -1,13 +1,14 @@
-package com.cskaoyan.project1.controller;
+package com.cskaoyan.project1.controller.admin;
 
 import com.cskaoyan.project1.model.Result;
 import com.cskaoyan.project1.model.Type;
-import com.cskaoyan.project1.model.bo.AddGoodsBO;
-import com.cskaoyan.project1.model.bo.AddTypeBO;
-import com.cskaoyan.project1.model.bo.ReplyBO;
-import com.cskaoyan.project1.model.vo.GoodsInfoVO;
-import com.cskaoyan.project1.model.vo.MsgVO;
-import com.cskaoyan.project1.model.vo.TypeGoodsVO;
+import com.cskaoyan.project1.model.bo.goods.AddGoodsBO;
+import com.cskaoyan.project1.model.bo.goods.AddTypeBO;
+import com.cskaoyan.project1.model.bo.goods.ReplyBO;
+import com.cskaoyan.project1.model.bo.goods.UpdateGoodsBO;
+import com.cskaoyan.project1.model.vo.goods.GoodsInfoVO;
+import com.cskaoyan.project1.model.vo.goods.MsgVO;
+import com.cskaoyan.project1.model.vo.goods.TypeGoodsVO;
 import com.cskaoyan.project1.service.GoodsService;
 import com.cskaoyan.project1.service.GoodsServiceImpl;
 import com.cskaoyan.project1.utils.FileUploadUtils;
@@ -46,7 +47,22 @@ public class GoodsServlet extends HttpServlet {
             imgUpload(request, response);
         }else if("addGoods".equals(action)){
             addGoods(request, response);
+        }else if("updateGoods".equals(action)){
+            updateGoods(request, response);
         }
+    }
+
+    /**
+     * 修改商品信息
+     * @param request
+     * @param response
+     */
+    private void updateGoods(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String requestBody = HttpUtils.getRequestBody(request);
+        UpdateGoodsBO updateGoodsBO = gson.fromJson(requestBody, UpdateGoodsBO.class);
+        goodsService.updateGoods(updateGoodsBO);
+        response.getWriter().println(gson.toJson(Result.ok("修改成功！")));
     }
 
     /**
@@ -126,10 +142,43 @@ public class GoodsServlet extends HttpServlet {
             repliedMsg(request, response);
         }else if("getType".equals(action)){
             getType(request, response);
+        } else if("deleteType".equals(action)){
+            deleteType(request, response);
         }else if("getGoodsByType".equals(action)){
             getGoodsByType(request, response);
         }else if("getGoodsInfo".equals(action)){
             getGoodsInfo(request, response);
+        }else if("deleteGoods".equals(action)){
+            deleteGoods(request, response);
+        }
+    }
+
+    /**
+     * 删除某个类目
+     * 先删除该类目下所有商品，再删除类目
+     * @param request
+     * @param response
+     */
+    private void deleteType(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        Integer typeId = Integer.parseInt(request.getParameter("typeId"));
+        goodsService.deleteType(typeId);
+        response.getWriter().println(gson.toJson(Result.ok("删除成功，请刷新！")));
+    }
+
+    /**
+     * 删除商品
+     * @param request
+     * @param response
+     */
+    private void deleteGoods(HttpServletRequest request, HttpServletResponse response) {
+
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        goodsService.deleteGoods(id);
+        try {
+            response.getWriter().println(gson.toJson(Result.ok()));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

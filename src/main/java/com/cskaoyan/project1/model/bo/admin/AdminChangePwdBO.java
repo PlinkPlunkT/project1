@@ -1,4 +1,4 @@
-package com.cskaoyan.project1.model.bo;
+package com.cskaoyan.project1.model.bo.admin;
 
 /**
  * @auther Ningbo Tien

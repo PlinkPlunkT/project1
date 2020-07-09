@@ -1,11 +1,16 @@
-package com.cskaoyan.project1.model.vo;
+package com.cskaoyan.project1.model.bo.goods;
+
+import com.cskaoyan.project1.model.vo.goods.SpecVO;
+
+import java.util.List;
 
 /**
- * 后台显示某一类目商品所用VO
  * @auther Ningbo Tien
- * @date 2020-07-07 15:22
+ * @date 2020-07-08 11:23
  */
-public class TypeGoodsVO {
+public class UpdateGoodsBO {
+
+    private String desc;
 
     private Integer id;
 
@@ -13,11 +18,17 @@ public class TypeGoodsVO {
 
     private String name;
 
-    private Double price;
-
     private Integer typeId;
 
-    private Integer stockNum;
+    private List<SpecVO> specList;
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public Integer getId() {
         return id;
@@ -43,14 +54,6 @@ public class TypeGoodsVO {
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public Integer getTypeId() {
         return typeId;
     }
@@ -59,11 +62,11 @@ public class TypeGoodsVO {
         this.typeId = typeId;
     }
 
-    public Integer getStockNum() {
-        return stockNum;
+    public List<SpecVO> getSpecList() {
+        return specList;
     }
 
-    public void setStockNum(Integer stockNum) {
-        this.stockNum = stockNum;
+    public void setSpecList(List<SpecVO> specList) {
+        this.specList = specList;
     }
 }

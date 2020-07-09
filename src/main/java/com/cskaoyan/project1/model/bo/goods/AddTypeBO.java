@@ -1,11 +1,11 @@
-package com.cskaoyan.project1.model.vo;
+package com.cskaoyan.project1.model.bo.goods;
 
 /**
- * noReplyMsg中使用
+ * 添加类目时使用的BO
  * @auther Ningbo Tien
- * @date 2020-07-06 18:30
+ * @date 2020-07-07 15:58
  */
-public class UserVO {
+public class AddTypeBO {
     private String name;
 
     public String getName() {

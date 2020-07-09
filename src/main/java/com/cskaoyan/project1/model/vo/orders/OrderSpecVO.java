@@ -1,17 +1,14 @@
-package com.cskaoyan.project1.model.vo;
+package com.cskaoyan.project1.model.vo.orders;
 
 /**
- * GoodsInfoVO中使用
  * @auther Ningbo Tien
- * @date 2020-07-08 0:54
+ * @date 2020-07-09 15:26
  */
-public class SpecVO {
+public class OrderSpecVO {
 
     private Integer id;
 
-    private String specName;
-
-    private Integer stockNum;
+    private  String specName;
 
     private Double unitPrice;
 
@@ -29,14 +26,6 @@ public class SpecVO {
 
     public void setSpecName(String specName) {
         this.specName = specName;
-    }
-
-    public Integer getStockNum() {
-        return stockNum;
-    }
-
-    public void setStockNum(Integer stockNum) {
-        this.stockNum = stockNum;
     }
 
     public Double getUnitPrice() {

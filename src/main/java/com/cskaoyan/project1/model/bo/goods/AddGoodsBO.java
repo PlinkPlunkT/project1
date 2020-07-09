@@ -1,6 +1,5 @@
-package com.cskaoyan.project1.model.bo;
+package com.cskaoyan.project1.model.bo.goods;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
